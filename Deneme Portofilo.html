@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enes Kantarcı - Senior Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary: #1e293b;
+            --accent: #06b6d4;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --background: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --border: rgba(148, 163, 184, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-window {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .window-header {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ef4444; }
+        .dot.yellow { background: #eab308; }
+        .dot.green { background: #22c55e; }
+
+        .code-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-line {
+            margin-bottom: 4px;
+        }
+
+        .keyword { color: #c792ea; }
+        .function { color: #82aaff; }
+        .string { color: #c3e88d; }
+        .comment { color: var(--text-muted); }
+
+        /* Section Styling */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            max-width: 600px;
+            margin: 0 auto 80px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 100px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .profile-info .role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .location {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .profile-card {
+                position: static;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Smooth Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(37, 99, 235, 0.2);
+            z-index: 999;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">Enes</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Ana Sayfa</a></li>
+                    <li><a href="#about" class="nav-link">Hakkımda</a></li>
+                    <li><a href="#skills" class="nav-link">Yetenekler</a></li>
+                    <li><a href="#projects" class="nav-link">Projeler</a></li>
+                    <li><a href="#contact" class="nav-link">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-subtitle">Senior Full Stack Developer</div>
+                    <h1>Enes Kantarcı</h1>
+                    <p class="hero-description">
+                        14 yaşında deneyimli geliştirici. Modern web teknolojileri ve clean code prensipleriyle 
+                        ölçeklenebilir çözümler üretiyorum. Sürekli öğrenme ve inovasyona odaklanarak projeler geliştiriyorum.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Projelerimi Görün</a>
+                        <a href="#contact" class="btn btn-secondary">İletişime Geçin</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="window-dots">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <span style="margin-left: 12px; font-size: 12px; color: var(--text-muted);">app.js</span>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line"><span class="keyword">const</span> <span class="function">developer</span> = {</div>
+                            <div class="code-line">  name: <span class="string">"Enes"</span>,</div>
+                            <div class="code-line">  age: <span class="string">"14"</span>,</div>
+                            <div class="code-line">  role: <span class="string">"Senior Developer"</span>,</div>
+                            <div class="code-line">  location: <span class="string">"Bursa, TR"</span>,</div>
+                            <div class="code-line">  skills: [<span class="string">"React"</span>, <span class="string">"Node.js"</span>],</div>
+                            <div class="code-line">  passion: <span class="string">"Clean Code"</span></div>
+                            <div class="code-line">};</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="comment">// Always learning 🚀</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Hakkımda</h2>
+                <p class="section-subtitle">Teknolojiyi seven, sürekli öğrenen ve kaliteli kod yazan bir geliştirici</p>
+            </div>
+
+            <div class="about-content">
+                <div class="profile-card fade-in">
+                    <div class="profile-avatar">👨‍💻</div>
+                    <div class="profile-info">
+                        <h3>Enes Kantarcı</h3>
+                        <div class="role">Senior Developer</div>
+                        <div class="location">Bursa, Türkiye</div>
+                    </div>
+                </div>
+
+                <div class="about-text fade-in">
+                    <p>
+                        Merhaba! Ben Enes, 14 yaşında tutkulu bir yazılım geliştiriciısiyim. Genç yaşımda başladığım bu yolculukta, 
+                        modern web teknolojileri ve yazılım mimarisi konularında derinlemesine bilgi edinmiş bulunuyorum.
+                    </p>
+                    <p>
+                        Sürekli öğrenmeyi ve en iyi practices'leri takip etmeyi önemsiyorum. Clean Code, SOLID prensipleri ve 
+                        agile metodolojiler ile çalışarak, sürdürülebilir ve ölçeklenebilir yazılımlar geliştirmeye odaklanıyorum.
+                    </p>
+                    <p>
+                        Özellikle full-stack development, sistem tasarımı ve performans optimizasyonu konularında uzmanlaşmaya 
+                        devam ediyorum. Her proje benim için yeni bir öğrenme fırsatı ve kendimi geliştirme şansı.
+                    </p>
+                </div>
+            </div>
+
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Yıl Deneyim</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Tamamlanan Proje</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Teknoloji</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Teknolojiler & Yetenekler</h2>
+                <p class="section-subtitle">Uzmanlaştığım alanlar ve kullandığım teknolojiler</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">⚛️</div>
+                        <h3 class="skill-title">Frontend Development</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">SASS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">🔧</div>
+                        <h3 class="skill-title">Backend Development</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">RESTful API</span>
+                        <span class="skill-tag">GraphQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">🗄️</div>
+                        <h3 class="skill-title">Database & Storage</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Supabase</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">☁️</div>
+                        <h3 class="skill-title">DevOps & Cloud</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Vercel</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">📱</div>
+                        <h3 class="skill-title">Mobile Development</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Expo</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">PWA</span>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="skill-header">
+                        <div class="skill-icon">🛠️</div>
+                        <h3 class="skill-title">Tools & Workflow</h3>
+                    </div>
+                    <div class="skill-list">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Jest</span>
+                        <span class="skill-tag">Webpack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Öne Çıkan Projeler</h2>
+                <p class="section-subtitle">Geliştirdiğim ve üzerinde çalıştığım projelerin bir seçkisi</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">🌐</div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-description">
+                            Modern e-ticaret sitesi. Ödeme entegrasyonu, kullanıcı yönetimi ve admin paneli ile tam kapsamlı çözüm.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Task Management App</h3>
+                        <p class="project-description">
+                            Takım çalışması için geliştirilmiş proje yönetimi uygulaması. Real-time collaboration özellikleri.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">🤖</div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Content Generator</h3>
+                        <p class="project-description">
+                            OpenAI API entegrasyonu ile içerik üretimi yapan web uygulaması. Çoklu dil desteği ve özelleştirilebilir çıktılar.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-description">
+                            İşletmeler için geliştirilmiş analitik dashboard. Real-time veri görselleştirme ve raporlama sistemi.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">İletişime Geçin</h2>
+                <p class="section-subtitle">Projeleriniz için benimle iletişime geçmekten çekinmeyin</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">📍</div>
+                    <h3 class="contact-title">Lokasyon</h3>
+                    <p class="contact-info">Bursa, Türkiye</p>
+                </div>
+
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">✉️</div>
+                    <h3 class="contact-title">E-posta</h3>
+                    <p class="contact-info">
+                        <a href="mailto:saintaziz053@gmail.com" class="contact-link">saintaziz053@gmail.com</a>
+                    </p>
+                </div>
+
+                <div class="contact-card fade-in">
+                    <div class="contact-icon">💬</div>
+                    <h3 class="contact-title">Discord</h3>
+                    <p class="contact-info">wolfxsaint</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Enes Kantarcı. Tüm hakları saklıdır. | Bursa, Türkiye'den ❤️ ile kodlanmıştır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = 70;
+                    const targetPosition = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active navigation link tracking
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll progress bar
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add scroll event listeners
+            window.addEventListener('scroll', () => {
+                updateActiveNavLink();
+                updateScrollProgress();
+            });
+
+            // Initial calls
+            updateActiveNavLink();
+            updateScrollProgress();
+        });
+
+        // Navigation background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+
+        // Add typing animation to code window
+        function typeCode() {
+            const codeLines = document.querySelectorAll('.code-line');
+            codeLines.forEach((line, index) => {
+                line.style.opacity = '0';
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.animation = 'fadeInUp 0.5s ease forwards';
+                }, index * 200);
+            });
+        }
+
+        // Start typing animation when hero section is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(typeCode, 1000);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('#home');
+            if (heroSection) {
+                heroObserver.observe(heroSection);
+            }
+        });
+    </script>
+</body>
+</html>
